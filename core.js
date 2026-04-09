@@ -111,6 +111,25 @@ function navScroll() {
   });
 }
 
+function loadWistiaScript(callback) {
+  if (window._wistiaLoaded) {
+    callback?.();
+    return;
+  }
+
+  window._wistiaLoaded = true;
+
+  const script = document.createElement("script");
+  script.src = "https://fast.wistia.com/assets/external/E-v1.js";
+  script.async = true;
+
+  script.onload = () => {
+    callback?.();
+  };
+
+  document.head.appendChild(script);
+}
+
 function floatingLabel() {
   document.querySelectorAll(".form_main_input").forEach(function (input) {
     input.addEventListener("focusout", function () {
